@@ -22,7 +22,7 @@ The IAM role should have a *Trust relationship* that looks like this:
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.<AWS_REGION>.amazonaws.com/id/<GUID>:sub": "system:serviceaccount:<NAMESPACE>:<SERVICE_ACCOUNT>"
+          "oidc.eks.<AWS_REGION>.amazonaws.com/id/<GUID>:sub": "system:serviceaccount:test-irsa-ns:test-sa"
         }
       }
     }

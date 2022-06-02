@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: test-irsa
+  name: test-irsa-ns
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: test-sa
-  namespace: test-irsa
+  namespace: test-irsa-ns
   annotations:
     eks.amazonaws.com/role-arn: "<FULL_ARN>"
     eks.amazonaws.com/sts-regional-endpoints: "true"
@@ -17,7 +17,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: test-irsa
-  namespace: test-irsa
+  namespace: test-irsa-ns
   labels:
     app: test-irsa
 spec:
