@@ -30,6 +30,8 @@ The IAM role should have a *Trust relationship* that looks like this:
 }
 ```
 
+Replace <AWS_ACCOUNT_ID>, <AWS_REGION>, <GUID> and test-irsa-ns (Namespace) and test-sa (ServiceAccount) with your actual values.
+
 ## Install instructions
 
 - Copy the full ARN for your IRSA test role.
@@ -40,15 +42,15 @@ The IAM role should have a *Trust relationship* that looks like this:
 kubectl apply -f test-irsa.yaml
 ```
 
-This will create a namespace called *test-irsa* with a pod inside.
+This will create a namespace called *test-irsa-ns* with a pod inside.
 
 ## Test instructions
 
 ### Get inside the pod
 
 ```bash
-POD_NAME=$(kubectl get pod -n test-irsa --no-headers -o custom-columns='NAME:.metadata.name')
-kubectl --namespace test-irsa exec --stdin --tty $POD_NAME -- /bin/bash
+POD_NAME=$(kubectl get pod -n test-irsa-ns --no-headers -o custom-columns='NAME:.metadata.name')
+kubectl --namespace test-irsa-ns exec --stdin --tty $POD_NAME -- /bin/bash
 ```
 
 ### Find your IAM identity
@@ -61,9 +63,9 @@ You should then see something like:
 
 ```json
 {
-    "UserId": "ID:IRSA-IRSA",
-    "Account": "ACCOUNT_ID",
-    "Arn": "arn:aws:sts::ACCOUNT_ID:assumed-role/ROLE_NAME/IRSA-IRSA"
+    "UserId": "<USER_ID>",
+    "Account": "<ACCOUNT_ID>",
+    "Arn": "arn:aws:sts::<ACCOUNT_ID>:assumed-role/TestIRSA/botocore-session-<SESSION_ID>"
 }
 ```
 
