@@ -1,4 +1,4 @@
-FROM nginx:1.26.0
+FROM nginx:1.27
 
 RUN apt update && \
     apt install awscli less -y
