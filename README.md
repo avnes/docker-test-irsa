@@ -39,6 +39,7 @@ Replace <AWS_ACCOUNT_ID>, <AWS_REGION>, <GUID> and test-irsa-ns (Namespace) and 
 - Apply test-irsa.yaml to your EKS cluster:
 
 ```bash
+kubectl config set-context --current --namespace=<namespace>
 kubectl apply -f test-irsa.yaml
 ```
 
@@ -49,8 +50,9 @@ This will create a namespace called *test-irsa-ns* with a pod inside.
 ### Get inside the pod
 
 ```bash
-POD_NAME=$(kubectl get pod -n test-irsa-ns --no-headers -o custom-columns='NAME:.metadata.name')
-kubectl --namespace test-irsa-ns exec --stdin --tty $POD_NAME -- /bin/bash
+kubectl config set-context --current --namespace=<namespace>
+POD_NAME=$(kubectl get pod --no-headers -o custom-columns='NAME:.metadata.name')
+kubectl exec --stdin --tty $POD_NAME -- /bin/bash
 ```
 
 ### Find your IAM identity

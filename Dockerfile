@@ -1,4 +1,4 @@
-FROM nginx:1.27
+FROM nginx:1.27-alpine
 
-RUN apt update && \
-    apt install awscli less -y
+RUN apk update && \
+apk add aws-cli less postgresql14-client
