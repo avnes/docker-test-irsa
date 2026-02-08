@@ -1,4 +1,4 @@
-FROM nginx:1.29.1-alpine
+FROM nginx:1.29.5-alpine
 
 ENV PGSSLROOTCERT=/etc/ssl/certs/ca-certificates.crt
 ENV PGSSLMODE=verify-full
